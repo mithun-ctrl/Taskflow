@@ -47,8 +47,8 @@ export default function Dashboard() {
     <div className="px-10 py-8 max-w-6xl mx-auto">
       {/* Header */}
       <div className="mb-10">
-        <h2 className="text-2xl font-bold text-zinc-900 dark:text-white leading-tight">Good day, {user?.name?.split(' ')[0]}</h2>
-        <p className="text-sm text-zinc-400 dark:text-zinc-500 mt-1">Here's what's happening across your projects.</p>
+        <h2 className="text-2xl font-bold text-zinc-900 dark:text-white leading-tight">Welcome, {user?.name?.split(' ')[0]}</h2>
+        <p className="text-sm text-zinc-400 dark:text-zinc-500 mt-1">See your projects.</p>
       </div>
 
       {/* Overview */}
