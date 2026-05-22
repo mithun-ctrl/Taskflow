@@ -41,22 +41,14 @@ A full-stack project and task management application with role-based access cont
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/mithun-ctrl/taskflow
 cd taskflow
 ```
 
-### 2. Install server dependencies
+### 2. Install dependencies
 
 ```bash
 npm install
-```
-
-### 3. Install client dependencies
-
-```bash
-cd client
-npm install
-cd ..
 ```
 
 ### 4. Configure environment variables
@@ -64,10 +56,10 @@ cd ..
 Copy the example env file and fill in your values:
 
 ```bash
-cp server/.env.example server/.env
+cp .env.example .env
 ```
 
-Edit `server/.env`:
+Edit `.env`:
 
 ```env
 DATABASE_URL=postgresql://user:password@host/dbname?sslmode=require
@@ -101,14 +93,7 @@ Run the backend and frontend in separate terminals:
 ```bash
 npm run dev
 ```
-Server starts at `http://localhost:5000`
-
-**Frontend** (in a new terminal):
-```bash
-cd client
-npm run dev
-```
-Client starts at `http://localhost:5173`. API requests are proxied to `http://localhost:5000` via Vite's dev proxy.
+Website starts at `http://localhost:5000`
 
 ---
 
@@ -136,8 +121,11 @@ taskflow/
 │   ├── routes/              # Express routers
 │   └── index.js             # Express app entry point
 │
+├── .gitignore
+├── package-lock.json
+├── .env.example│
 ├── package.json             # Server package config
-└── server/.env.example      # Example environment variables
+└── .env      # Example environment variables
 ```
 
 ---
@@ -195,63 +183,6 @@ The server listens on the port defined in `process.env.PORT` (default `5000`) an
    ```
    npm run build
    ```
-7. Run the migration once after first deploy. You can do this via Railway's shell:
-   ```bash
-   node server/db/migrate.js
-   ```
-
-### Other Platforms (Render, Fly.io, Heroku, VPS)
-
-1. Ensure **Node.js ≥ 20.19** is available on the host.
-2. Set all environment variables listed in the [Configuration](#4-configure-environment-variables) section.
-3. Run the build step: `npm run build`
-4. Run the migration: `node server/db/migrate.js`
-5. Start the server: `npm start`
-
-For platforms that support a `Procfile`:
-
-```
-web: npm start
-```
-
----
-
-## API Overview
-
-All API routes are prefixed with `/api`.
-
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| POST | `/auth/signup` | — | Register a new user |
-| POST | `/auth/login` | — | Login and receive JWT |
-| GET | `/auth/me` | ✓ | Get current user |
-| GET | `/dashboard` | ✓ | Dashboard stats and task summaries |
-| GET | `/projects` | ✓ | List user's projects |
-| POST | `/projects` | ✓ | Create a new project |
-| GET | `/projects/:id` | ✓ | Get project details |
-| DELETE | `/projects/:id` | ✓ Admin | Delete a project |
-| GET | `/projects/:id/tasks` | ✓ | List tasks for a project |
-| POST | `/projects/:id/tasks` | ✓ Admin | Create a task |
-| PUT | `/tasks/:id` | ✓ Admin | Update a task |
-| PATCH | `/tasks/:id/status` | ✓ Admin/Assignee | Update task status |
-| DELETE | `/tasks/:id` | ✓ Admin | Delete a task |
-| GET | `/projects/:id/members` | ✓ | List project members |
-| POST | `/projects/:id/members` | ✓ Admin | Add a member by email |
-| PUT | `/projects/:id/members/:userId` | ✓ Admin | Change member role |
-| DELETE | `/projects/:id/members/:userId` | ✓ Admin | Remove a member |
-
----
-
-## Database Schema
-
-```sql
-users           — id, name, email, password_hash, created_at
-projects        — id, name, description, owner_id, created_at
-project_members — project_id, user_id, role (admin|member), joined_at
-tasks           — id, project_id, title, description, assignee_id,
-                  created_by, status (todo|in_progress|done),
-                  priority (low|medium|high), due_date, created_at
-```
 
 ---
 
