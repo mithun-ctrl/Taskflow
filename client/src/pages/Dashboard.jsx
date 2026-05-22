@@ -116,7 +116,7 @@ export default function Dashboard() {
           <p className="text-[0.6875rem] font-semibold text-zinc-400 dark:text-zinc-600 uppercase tracking-widest mb-4">Overdue Tasks</p>
           <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden transition-colors duration-200">
             {!data?.overdueTasks?.length ? (
-              <p className="text-zinc-300 dark:text-zinc-700 text-sm p-6">No overdue tasks. Great job ✓</p>
+              <p className="text-zinc-300 dark:text-zinc-700 text-sm p-6">No overdue tasks</p>
             ) : (
               data.overdueTasks.map((task, i) => (
                 <div key={task.id} className={`flex items-center gap-3 px-5 py-3.5 ${i !== data.overdueTasks.length - 1 ? 'border-b border-zinc-100 dark:border-zinc-900' : ''}`}>
